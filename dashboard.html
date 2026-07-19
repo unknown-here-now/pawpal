@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' http://127.0.0.1:5001 https://pawpal-300c5.web.app https://pawpal-300c5.firebaseapp.com;">
+  <title>PawPal - Impact Dashboard</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./assets/images/Logo.png?v=2">
+  <link rel="apple-touch-icon" href="./assets/images/Logo.png?v=2">
+  <meta name="theme-color" content="#047857">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Lora (for Serif Logo) and Outfit + Inter for UI text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,600;1,600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandCream: '#FAFAF9',
+            brandCreamDark: '#F4F3EF',
+            brandCharcoal: '#1E1B4B',
+            brandTan: '#D97706',
+            brandOrange: '#C2410C',
+            brandGreen: '#15803D',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            serifLogo: ['Lora', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandCream text-gray-800 font-sans selection:bg-brandTan selection:text-white">
+
+  <!-- Top Global Navigation Header -->
+  <header class="sticky top-0 z-50 bg-brandCream/95 backdrop-blur-md border-b border-stone-200/80 px-6 py-4 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Logo Frame -->
+      <a href="index.html" class="flex items-center space-x-2.5 group">
+        <img src="./assets/images/Logo.png?v=2" alt="PawPal Logo" class="w-8 h-8 rounded-full object-contain">
+        <span class="text-2xl font-serifLogo font-bold text-brandCharcoal tracking-wider">PAWPAL</span>
+      </a>
+
+      <!-- Desktop Navbar links -->
+      <nav class="hidden md:flex space-x-8 text-[15px] font-medium text-brandCharcoal">
+        <a href="./index.html" class="hover:text-brandOrange transition-colors duration-200">Home</a>
+        <a href="./index.html#reporting-section" class="hover:text-brandOrange transition-colors duration-200">Report a Stray</a>
+        <a href="./about.html" class="hover:text-brandOrange transition-colors duration-200">About us</a>
+        <a href="./volunteer.html" class="hover:text-brandOrange transition-colors duration-200">Join In</a>
+        <a href="./dashboard.html" class="text-brandOrange font-semibold transition-colors duration-200">Impact</a>
+      </nav>
+
+      <!-- Action Trigger -->
+      <div class="flex items-center space-x-4">
+        <a href="./index.html#reporting-section" class="hidden sm:inline-flex items-center bg-brandOrange text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-brandOrange/90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-sm">
+          Report Distress
+        </a>
+        
+        <!-- Mobile Menu Hamburger Button -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="inline-flex md:hidden p-2 rounded-xl text-brandCharcoal hover:bg-brandCreamDark/80 focus:outline-none transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Responsive Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-stone-200/60 mt-4 pt-4 pb-2 flex flex-col space-y-3 px-2 font-medium text-[15px] text-brandCharcoal">
+      <a href="./index.html" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">Home</a>
+      <a href="./index.html#reporting-section" onclick="closeMobileMenu()" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">Report a Stray</a>
+      <a href="./about.html" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">About us</a>
+      <a href="./volunteer.html" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">Join In</a>
+      <a href="./dashboard.html" class="text-brandOrange font-semibold py-1.5">Impact</a>
+    </div>
+  </header>
+
+  <!-- Dashboard Overview -->
+  <main class="max-w-7xl mx-auto py-12 px-6 space-y-16">
+    
+    <!-- Header Block -->
+    <div class="text-center max-w-xl mx-auto space-y-3">
+      <span class="text-xs font-semibold tracking-widest text-brandOrange uppercase bg-brandTan/15 px-3 py-1 rounded-full">
+        Real-Time Operations & Metrics
+      </span>
+      <h1 class="text-4xl md:text-5xl font-display font-extrabold text-brandCharcoal">
+        Impact & Rescue Dashboard
+      </h1>
+      <p class="text-stone-500 text-sm leading-relaxed">
+        Track local rescue statistics, claim open distress tickets, and monitor recovery progress.
+      </p>
+    </div>
+
+    <!-- Metrics Cards Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+      <div class="bg-white border border-stone-200 rounded-[20px] p-6 shadow-sm text-center">
+        <span class="text-4xl md:text-5xl font-display font-extrabold text-brandOrange">1,200+</span>
+        <h3 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mt-2">Rescues Completed</h3>
+      </div>
+      <div class="bg-white border border-stone-200 rounded-[20px] p-6 shadow-sm text-center">
+        <span class="text-4xl md:text-5xl font-display font-extrabold text-brandOrange">80+</span>
+        <h3 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mt-2">Registered Shelters</h3>
+      </div>
+      <div class="bg-white border border-stone-200 rounded-[20px] p-6 shadow-sm text-center">
+        <span class="text-4xl md:text-5xl font-display font-extrabold text-brandOrange">500+</span>
+        <h3 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mt-2">Active Volunteers</h3>
+      </div>
+      <div class="bg-white border border-stone-200 rounded-[20px] p-6 shadow-sm text-center">
+        <span class="text-4xl md:text-5xl font-display font-extrabold text-brandOrange">6+</span>
+        <h3 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mt-2">Cities Covered</h3>
+      </div>
+    </div>
+
+    <!-- NGO Vetting Queue Card (Hidden by default) -->
+    <div id="ngo-vetting-card" class="bg-white rounded-[24px] border border-stone-200 shadow-lg p-6 md:p-8 space-y-6 max-w-5xl mx-auto hidden mb-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-display font-extrabold text-brandCharcoal">📋 Volunteer Vetting & Verification Queue</h2>
+          <p class="text-xs text-stone-400 mt-0.5">Review and approve volunteer applications registered under your NGO.</p>
+        </div>
+        <div>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold text-brandOrange bg-brandOrange/10 border border-brandOrange/20">
+            Pending Actions
+          </span>
+        </div>
+      </div>
+      
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs md:text-sm">
+          <thead>
+            <tr class="border-b border-stone-200 text-stone-400 font-semibold">
+              <th class="py-3 px-4">Volunteer Name</th>
+              <th class="py-3 px-4">Contact Email</th>
+              <th class="py-3 px-4">Mobile Number</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="vetting-tbody" class="divide-y divide-stone-100 text-stone-700 font-medium">
+            <!-- Dynamic Vetting Entries -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Live Tickets Queue Simulator (With Lock Overlay capability) -->
+    <div id="distress-queue-container" class="relative max-w-5xl mx-auto">
+      <div id="distress-queue-card" class="bg-white rounded-[24px] border border-stone-200 shadow-lg p-6 md:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-display font-extrabold text-brandCharcoal">Live Distress Rescue Queue</h2>
+            <p class="text-xs text-stone-400 mt-0.5">Alerts dispatched in the Bangalore region. NGO representatives can click to claim cases.</p>
+          </div>
+          <div>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold text-brandGreen bg-brandGreen/10 border border-brandGreen/20">
+              <span class="w-2 h-2 rounded-full bg-brandGreen mr-1.5 animate-ping"></span> Live Dispatch Feed
+            </span>
+          </div>
+        </div>
+
+        <!-- Tickets Table / List -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs md:text-sm">
+            <thead>
+              <tr class="border-b border-stone-200 text-stone-400 font-semibold">
+                <th class="py-3 px-4">Ticket ID</th>
+                <th class="py-3 px-4">Location (GPS)</th>
+                <th class="py-3 px-4">Condition Description</th>
+                <th class="py-3 px-4">Severity</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tickets-tbody" class="divide-y divide-stone-100 text-stone-700 font-medium">
+              <!-- Ticket 1 -->
+              <tr id="row-paw-7821">
+                <td class="py-4 px-4 font-bold text-brandCharcoal">#PAW-7821</td>
+                <td class="py-4 px-4 text-stone-500">📍 12.9716, 77.5946</td>
+                <td class="py-4 px-4 font-normal">Fluffy dog with front paw swelling near Indiranagar metro station.</td>
+                <td class="py-4 px-4"><span class="px-2 py-0.5 bg-red-100 text-red-800 rounded-full font-bold text-[10px] uppercase">High</span></td>
+                <td class="py-4 px-4 text-status"><span class="text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full text-[10px]">Open Dispatch</span></td>
+                <td class="py-4 px-4 text-right">
+                  <button onclick="claimTicket('paw-7821')" class="bg-brandOrange hover:bg-brandOrange/90 text-white font-bold py-1.5 px-3 rounded-full text-xs transition-colors">Claim</button>
+                </td>
+              </tr>
+              <!-- Ticket 2 -->
+              <tr id="row-paw-4392">
+                <td class="py-4 px-4 font-bold text-brandCharcoal">#PAW-4392</td>
+                <td class="py-4 px-4 text-stone-500">📍 12.9830, 77.6102</td>
+                <td class="py-4 px-4 font-normal">Kitten stuck in drainage pipes under heavy rain near Halasuru lake.</td>
+                <td class="py-4 px-4"><span class="px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded-full font-bold text-[10px] uppercase">Medium</span></td>
+                <td class="py-4 px-4 text-status"><span class="text-brandGreen bg-brandGreen/10 px-2 py-0.5 rounded-full text-[10px]">Claimed by NGO</span></td>
+                <td class="py-4 px-4 text-right">
+                  <button disabled class="bg-stone-300 text-stone-500 font-bold py-1.5 px-3 rounded-full text-xs cursor-not-allowed">Claimed</button>
+                </td>
+              </tr>
+              <!-- Ticket 3 -->
+              <tr id="row-paw-2104">
+                <td class="py-4 px-4 font-bold text-brandCharcoal">#PAW-2104</td>
+                <td class="py-4 px-4 text-stone-500">📍 12.9348, 77.6189</td>
+                <td class="py-4 px-4 font-normal">Stray cat skin infection on neck, needs local medical dropoff.</td>
+                <td class="py-4 px-4"><span class="px-2 py-0.5 bg-stone-100 text-stone-600 rounded-full font-bold text-[10px] uppercase">Low</span></td>
+                <td class="py-4 px-4 text-status"><span class="text-brandGreen bg-brandGreen/10 px-2 py-0.5 rounded-full text-[10px]">Claimed by NGO</span></td>
+                <td class="py-4 px-4 text-right">
+                  <button disabled class="bg-stone-300 text-stone-500 font-bold py-1.5 px-3 rounded-full text-xs cursor-not-allowed">Claimed</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Locked Overlay for Pending Approvals -->
+      <div id="queue-lock-overlay" class="absolute inset-0 bg-stone-100/80 backdrop-blur-md rounded-[24px] z-20 flex flex-col items-center justify-center p-8 text-center space-y-4 hidden">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-50 text-brandOrange shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-display font-extrabold text-brandCharcoal">Verification Pending</h3>
+        <p id="lock-overlay-msg" class="text-stone-500 text-sm max-w-md leading-relaxed">
+          Account Created! Awaiting approval from your linked NGO before field rescue access is granted.
+        </p>
+        <div class="px-4 py-2 bg-amber-100 border border-amber-200/60 rounded-full text-amber-800 text-xs font-bold animate-pulse">
+          Contact your coordinator to unlock field rescue assignments.
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Heartwarming Success Stories (2-Column Split matching 2.jpg) -->
+    <section class="max-w-5xl mx-auto border-t border-stone-200 pt-16">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <!-- Left Side: Text content -->
+        <div class="space-y-6">
+          <h2 class="text-3.5xl font-display font-extrabold text-brandCharcoal leading-tight">
+            Heartwarming Success Stories
+          </h2>
+          <p class="text-stone-600 leading-relaxed font-normal text-[15px]">
+            See how the platform has facilitated life-saving transformations. Through local citizen reporting and rapid coordination, hundreds of street dogs and cats have transitioned from critical road injuries to happy, adopted home companions. Our visual records show the real change happening every single day.
+          </p>
+          <div class="pt-2">
+            <button onclick="alert('Stay tuned! Detailed medical logs and rescue transformations will be loaded in our blog soon.')" class="inline-flex items-center text-brandCharcoal font-extrabold text-sm tracking-widest uppercase hover:text-brandOrange hover:translate-x-1.5 transition-all duration-300">
+              EXPLORE MORE STORIES <span class="ml-2.5 text-base">➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Side: Split transformations image -->
+        <div class="relative overflow-hidden rounded-[24px] border-4 border-white shadow-xl aspect-[4/3]">
+          <img src="assets/images/success-stories-split.jpg" alt="Transformations of adopted street cat and dog side-by-side" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="bg-brandCharcoal text-stone-300 py-16 px-6 border-t border-stone-900">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 items-start">
+      <!-- About Segment -->
+      <div class="space-y-4">
+        <div class="flex items-center space-x-2.5">
+          <div class="bg-white/10 p-2 rounded-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brandOrange" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 14c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-4.5-3c.83 0 1.5-.67 1.5-1.5S8.33 8 7.5 8 6 8.67 6 9.5 6.67 11 7.5 11zm9 0c.83 0 1.5-.67 1.5-1.5S17.33 8 16.5 8s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm-11-5C6.33 6 7 5.33 7 4.5S6.33 3 5.5 3 4 3.67 4 4.5 4.67 6 5.5 6zm13 0c.83 0 1.5-.67 1.5-1.5S17.33 3 16.5 3s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM12 16c-3.31 0-6 2.69-6 6h12c0-3.31-2.69-6-6-6z"/>
+            </svg>
+          </div>
+          <span class="text-xl font-serifLogo font-bold text-white tracking-wider">PAWPAL</span>
+        </div>
+        <p class="text-sm text-stone-400 leading-relaxed max-w-sm">
+          PawPal is a progressive platform built to eliminate rescue response delays for street animals in India, ensuring rapid dispatch, community action, and live transparency.
+        </p>
+      </div>
+
+      <!-- Quick Action segments -->
+      <div class="space-y-4">
+        <h4 class="text-base font-semibold text-white">Join the Cause</h4>
+        <ul class="space-y-2 text-sm text-stone-400">
+          <li><a href="index.html#reporting-section" class="hover:text-white transition-colors">Report Stray Distress</a></li>
+          <li><button onclick="toggleModal('ngo-modal')" class="hover:text-white transition-colors text-left focus:outline-none">Register NGO/Shelter</button></li>
+          <li><button onclick="toggleModal('volunteer-modal')" class="hover:text-white transition-colors text-left focus:outline-none">Become a Volunteer</button></li>
+        </ul>
+      </div>
+
+      <!-- Slogan segment -->
+      <div class="space-y-4 md:text-right">
+        <h4 class="text-xs uppercase tracking-widest text-brandTan font-bold">Indian Stray Animal Rescue</h4>
+        <p class="text-2xl font-display font-extrabold text-white leading-tight">
+          Together, we can make<br>a real difference!
+        </p>
+        <p class="text-xs text-stone-500 mt-2">© 2026 PawPal Rescue Network. Supporting UNSDG Life on Land.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- NGO Registration Modal -->
+  <div id="ngo-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brandCharcoal/55 backdrop-blur-sm hidden transition-all duration-300">
+    <div class="bg-white rounded-[24px] border border-stone-200 shadow-2xl p-8 max-w-md w-full relative">
+      <button onclick="toggleModal('ngo-modal')" class="absolute top-4 right-4 text-stone-400 hover:text-brandCharcoal">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h3 class="text-2xl font-display font-extrabold text-brandCharcoal mb-4">Register as Rescue NGO</h3>
+      <form class="space-y-4" onsubmit="handleRegistration('ngo-modal', event)">
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">NGO Name</label>
+          <input type="text" id="ngo-reg-name" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Operating Region</label>
+          <input type="text" placeholder="e.g. Indiranagar, Bangalore" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Contact Email</label>
+          <input type="email" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <button type="submit" class="w-full bg-brandOrange text-white font-bold py-3 rounded-full hover:bg-brandOrange/95 transition-all text-sm mt-2">
+          Submit Verification Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Volunteer Registration Modal -->
+  <div id="volunteer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brandCharcoal/55 backdrop-blur-sm hidden transition-all duration-300">
+    <div class="bg-white rounded-[24px] border border-stone-200 shadow-2xl p-8 max-w-md w-full relative">
+      <button onclick="toggleModal('volunteer-modal')" class="absolute top-4 right-4 text-stone-400 hover:text-brandCharcoal">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h3 class="text-2xl font-display font-extrabold text-brandCharcoal mb-4">Join as Volunteer</h3>
+      <form class="space-y-4" onsubmit="handleRegistration('volunteer-modal', event)">
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Full Name</label>
+          <input type="text" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Area / Pincode</label>
+          <input type="text" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Phone Number</label>
+          <input type="tel" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <button type="submit" class="w-full bg-brandOrange text-white font-bold py-3 rounded-full hover:bg-brandOrange/95 transition-all text-sm mt-2">
+          Register with PawPal
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Access Denied Modal -->
+  <div id="auth-warning-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brandCharcoal/55 backdrop-blur-sm hidden transition-all duration-300">
+    <div class="bg-white rounded-[24px] border border-stone-200 shadow-2xl p-8 max-w-md w-full text-center space-y-4">
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-100 text-red-600 mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-display font-extrabold text-brandCharcoal">Verified NGO Account Required</h3>
+      <p class="text-stone-500 text-sm leading-relaxed">
+        You must register as a verified NGO or volunteer responder to claim street rescue dispatches. Redirecting you to the Join In page to complete credentials registration...
+      </p>
+      <div class="flex justify-center">
+        <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-brandOrange"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle helpers
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.add('hidden');
+    }
+
+    // Generate SHA-256 for integrity verification
+    async function generateIntegritySignature(ticket) {
+      const dataStr = JSON.stringify(ticket) + "_pawpal_secure_integrity_salt_2026_xyz";
+      const encoder = new TextEncoder();
+      const data = encoder.encode(dataStr);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // BroadcastChannel receiver for real-time sync across tabs
+    try {
+      const distressChannel = new BroadcastChannel('pawpal_distress_channel');
+      distressChannel.onmessage = (event) => {
+        if (event.data && event.data.type === 'NEW_TICKET') {
+          console.log('New ticket broadcast received, re-rendering queue...');
+          loadAndRenderTickets();
+        }
+      };
+    } catch (bcError) {
+      console.warn("BroadcastChannel initialization error:", bcError);
+    }
+
+    // Default Mock Tickets if localStorage is empty
+    const DEFAULT_MOCK_TICKETS = [
+      {
+        id: "PAW-7821",
+        gps: "📍 12.9716, 77.5946",
+        description: "Fluffy dog with front paw swelling near Indiranagar metro station.",
+        severity: "High",
+        status: "Open Dispatch",
+        routedTo: "INDIRANAGAR ANIMAL PROTECTION WELFARE SHELTER",
+        distance: "0.0 km"
+      },
+      {
+        id: "PAW-4392",
+        gps: "📍 12.9830, 77.6102",
+        description: "Kitten stuck in drainage pipes under heavy rain near Halasuru lake.",
+        severity: "Medium",
+        status: "Claimed by NGO",
+        routedTo: "ULSOOR LOCAL NGO RESCUE & VETERINARY UNIT",
+        distance: "1.2 km"
+      },
+      {
+        id: "PAW-2104",
+        gps: "📍 12.9348, 77.6189",
+        description: "Stray cat skin infection on neck, needs local medical dropoff.",
+        severity: "Low",
+        status: "Claimed by NGO",
+        routedTo: "KORAMANGALA STRAY CARE SOCIETY",
+        distance: "2.1 km"
+      }
+    ];
+
+    // Load and Render Tickets with SHA-256 signature verification
+    async function loadAndRenderTickets() {
+      let rawTickets = [];
+      try {
+        rawTickets = JSON.parse(localStorage.getItem('pawpal_tickets'));
+        if (!rawTickets || !Array.isArray(rawTickets) || rawTickets.length === 0) {
+          rawTickets = DEFAULT_MOCK_TICKETS;
+        }
+      } catch (e) {
+        rawTickets = DEFAULT_MOCK_TICKETS;
+      }
+
+      // Automatically sign any unsigned raw tickets (such as initial default mocks)
+      let tickets = [];
+      let needsSave = false;
+      for (let i = 0; i < rawTickets.length; i++) {
+        const item = rawTickets[i];
+        if (item.id && !item.data) {
+          const sig = await generateIntegritySignature(item);
+          tickets.push({ data: item, signature: sig });
+          needsSave = true;
+        } else {
+          tickets.push(item);
+        }
+      }
+
+      if (needsSave) {
+        localStorage.setItem('pawpal_tickets', JSON.stringify(tickets));
+      }
+
+      const tbody = document.getElementById('tickets-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      for (let i = 0; i < tickets.length; i++) {
+        const envelope = tickets[i];
+        const ticket = envelope.data;
+        const signature = envelope.signature;
+
+        // Cryptographic integrity verification
+        const calculatedSig = await generateIntegritySignature(ticket);
+        const isTampered = calculatedSig !== signature;
+
+        const tr = document.createElement('tr');
+        tr.id = `row-${ticket.id.toLowerCase()}`;
+        
+        let severityBadge = '';
+        if (isTampered) {
+          severityBadge = `<span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded-full font-bold text-[10px] uppercase tracking-wider animate-pulse">Tampered</span>`;
+        } else if (ticket.severity.toLowerCase() === 'high') {
+          severityBadge = `<span class="px-2 py-0.5 bg-red-100 text-red-800 rounded-full font-bold text-[10px] uppercase">High</span>`;
+        } else if (ticket.severity.toLowerCase() === 'medium') {
+          severityBadge = `<span class="px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded-full font-bold text-[10px] uppercase">Medium</span>`;
+        } else {
+          severityBadge = `<span class="px-2 py-0.5 bg-stone-100 text-stone-600 rounded-full font-bold text-[10px] uppercase">${ticket.severity}</span>`;
+        }
+
+        const isClaimed = ticket.status.toLowerCase().includes('claimed');
+        const statusBadge = isClaimed 
+          ? `<span class="text-brandGreen bg-brandGreen/10 px-2 py-0.5 rounded-full text-[10px]">Claimed by NGO</span>`
+          : `<span class="text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full text-[10px]">Open Dispatch</span>`;
+
+        const actionButton = isClaimed
+          ? `<button disabled class="bg-stone-300 text-stone-500 font-bold py-1.5 px-3 rounded-full text-xs cursor-not-allowed">Claimed</button>`
+          : `<button onclick="claimTicket('${ticket.id}')" class="bg-brandOrange hover:bg-brandOrange/90 text-white font-bold py-1.5 px-3 rounded-full text-xs transition-colors">Claim</button>`;
+
+        tr.innerHTML = `
+          <td class="py-4 px-4 font-bold text-brandCharcoal">#${ticket.id.toUpperCase()}</td>
+          <td class="py-4 px-4 text-stone-500">${ticket.gps}</td>
+          <td class="py-4 px-4 font-normal max-w-xs md:max-w-md break-words ${isTampered ? 'line-through text-red-400' : ''}">${ticket.description}<br><span class="text-[10px] text-stone-400 font-semibold uppercase tracking-wider block mt-1">Routed to: ${ticket.routedTo} (${ticket.distance})</span></td>
+          <td class="py-4 px-4">${severityBadge}</td>
+          <td class="py-4 px-4 text-status">${statusBadge}</td>
+          <td class="py-4 px-4 text-right">${actionButton}</td>
+        `;
+        
+        tbody.appendChild(tr);
+      }
+    }
+
+    // Claim Ticket with security authorization guard redirects
+    function claimTicket(id) {
+      // 1. Auth check guard
+      const profileStr = localStorage.getItem('pawpal_user_profile');
+      if (!profileStr) {
+        const warningModal = document.getElementById('auth-warning-modal');
+        if (warningModal) {
+          warningModal.classList.remove('hidden');
+          setTimeout(() => {
+            window.location.href = './volunteer.html';
+          }, 2500);
+        } else {
+          alert("Access Denied: NGO Registration Required. Redirecting...");
+          window.location.href = './volunteer.html';
+        }
+        return;
+      }
+
+      // 2. Process claim state
+      let tickets = [];
+      try {
+        tickets = JSON.parse(localStorage.getItem('pawpal_tickets')) || [];
+      } catch (e) {
+        tickets = [];
+      }
+
+      const ticketIndex = tickets.findIndex(t => (t.data ? t.data.id : t.id).toLowerCase() === id.toLowerCase());
+      if (ticketIndex !== -1) {
+        const item = tickets[ticketIndex];
+        if (item.data) {
+          item.data.status = "Claimed by NGO";
+          generateIntegritySignature(item.data).then(newSig => {
+            item.signature = newSig;
+            localStorage.setItem('pawpal_tickets', JSON.stringify(tickets));
+            loadAndRenderTickets();
+            alert(`Success: Ticket #${id.toUpperCase()} has been claimed. Contact logs dispatched to your NGO portal.`);
+          });
+        } else {
+          item.status = "Claimed by NGO";
+          localStorage.setItem('pawpal_tickets', JSON.stringify(tickets));
+          loadAndRenderTickets();
+          alert(`Success: Ticket #${id.toUpperCase()} has been claimed.`);
+        }
+      }
+    }
+
+    // Open/Close Modals
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.toggle('hidden');
+    }
+
+    function handleRegistration(modalId, event) {
+      event.preventDefault();
+      
+      let ngoName = "INDIRANAGAR ANIMAL PROTECTION WELFARE SHELTER"; // default fallback
+      if (modalId === 'ngo-modal') {
+        const inputName = document.getElementById('ngo-reg-name');
+        if (inputName && inputName.value) {
+          ngoName = inputName.value;
+        }
+      }
+
+      // Store user profile to authenticate client session
+      const profile = {
+        name: ngoName,
+        email: "partner@pawpal.org",
+        role: "partner",
+        registeredAt: new Date().toISOString()
+      };
+      localStorage.setItem('pawpal_user_profile', JSON.stringify(profile));
+
+      alert(`Registration submitted! PawPal administrators have verified "${ngoName}". You are now authorized to vet volunteers and claim dispatches.`);
+      toggleModal(modalId);
+      
+      checkAuthAndAdjustView();
+    }
+
+    function checkAuthAndAdjustView() {
+      const profileStr = localStorage.getItem('pawpal_user_profile');
+      let profile = null;
+      if (profileStr) {
+        try {
+          profile = JSON.parse(profileStr);
+        } catch (e) {
+          profile = null;
+        }
+      }
+
+      const lockOverlay = document.getElementById('queue-lock-overlay');
+      const lockMsg = document.getElementById('lock-overlay-msg');
+      const ngoVettingCard = document.getElementById('ngo-vetting-card');
+
+      // Reset UI visibility states
+      if (lockOverlay) lockOverlay.classList.add('hidden');
+      if (ngoVettingCard) ngoVettingCard.classList.add('hidden');
+
+      if (!profile) return;
+
+      // Sync profile from global pawpal_users registry to fetch latest approval status
+      let usersList = [];
+      try {
+        usersList = JSON.parse(localStorage.getItem('pawpal_users')) || [];
+      } catch (e) {
+        usersList = [];
+      }
+      const updatedUser = usersList.find(u => u.phone === profile.phone);
+      if (updatedUser) {
+        profile = updatedUser;
+        localStorage.setItem('pawpal_user_profile', JSON.stringify(profile));
+      }
+
+      if (profile.role === 'volunteer') {
+        if (profile.verification_status === 'pending_approval') {
+          if (lockOverlay) {
+            lockOverlay.classList.remove('hidden');
+            lockMsg.innerHTML = `Account Created! Awaiting approval from <strong class="text-brandCharcoal font-extrabold">${profile.linked_ngo}</strong> before field rescue access is granted.`;
+          }
+        }
+      } else if (profile.role === 'partner') {
+        if (ngoVettingCard) {
+          ngoVettingCard.classList.remove('hidden');
+          loadAndRenderVettingQueue(profile.name);
+        }
+      }
+    }
+
+    function loadAndRenderVettingQueue(ngoName) {
+      const tbody = document.getElementById('vetting-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      let users = [];
+      try {
+        users = JSON.parse(localStorage.getItem('pawpal_users')) || [];
+      } catch (e) {
+        users = [];
+      }
+
+      // Filter pending volunteers registered under this specific NGO
+      const pendingVolunteers = users.filter(user => 
+        user.role === 'volunteer' && 
+        user.verification_status === 'pending_approval' &&
+        (user.linked_ngo === ngoName || ngoName === "NGO Partner / Registered Volunteer" || ngoName.toUpperCase().includes(user.linked_ngo.toUpperCase()) || user.linked_ngo.toUpperCase().includes(ngoName.toUpperCase()))
+      );
+
+      if (pendingVolunteers.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-6 text-center text-stone-400 italic">No volunteers currently awaiting vetting for ${ngoName}.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      pendingVolunteers.forEach(vol => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-stone-50 transition-colors";
+        
+        tr.innerHTML = `
+          <td class="py-4 px-4 font-bold text-brandCharcoal">${vol.name}</td>
+          <td class="py-4 px-4 text-stone-500">${vol.email}</td>
+          <td class="py-4 px-4 text-stone-500">${vol.phone}</td>
+          <td class="py-4 px-4">
+            <span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded-full font-semibold text-[10px] uppercase">Awaiting Vetting</span>
+          </td>
+          <td class="py-4 px-4 text-right space-x-2">
+            <button onclick="vetVolunteer('${vol.phone}', 'approved')" class="bg-brandGreen hover:bg-brandGreen/90 text-white font-bold py-1 px-2.5 rounded-full text-[11px] transition-colors">Approve Volunteer</button>
+            <button onclick="vetVolunteer('${vol.phone}', 'declined')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-1 px-2.5 rounded-full text-[11px] transition-colors">Decline</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function vetVolunteer(phone, status) {
+      let users = [];
+      try {
+        users = JSON.parse(localStorage.getItem('pawpal_users')) || [];
+      } catch (e) {
+        users = [];
+      }
+
+      const idx = users.findIndex(u => u.phone === phone);
+      if (idx !== -1) {
+        users[idx].verification_status = status;
+        const profile = JSON.parse(localStorage.getItem('pawpal_user_profile'));
+        users[idx].approved_by = status === 'approved' ? (profile ? profile.name : "NGO Shelters") : "";
+        localStorage.setItem('pawpal_users', JSON.stringify(users));
+        
+        alert(`Volunteer status successfully set to: ${status.toUpperCase()}`);
+        
+        // Re-render
+        if (profile) {
+          loadAndRenderVettingQueue(profile.name);
+        }
+      }
+    }
+
+    // Initialize list on content load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadAndRenderTickets();
+      checkAuthAndAdjustView();
+    });
+
+    // Register Service Worker for offline capability with force update reload
+    if ('serviceWorker' in navigator) {
+      // Force reload on controllerchange (when new worker claims client control)
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('Service worker controller changed, reloading page...');
+        window.location.reload();
+      });
+
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => {
+            console.log('Service Worker registered successfully:', reg.scope);
+            reg.addEventListener('updatefound', () => {
+              const newWorker = reg.installing;
+              if (newWorker) {
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log('New service worker available, force reloading page...');
+                    window.location.reload();
+                  }
+                });
+              }
+            });
+          })
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

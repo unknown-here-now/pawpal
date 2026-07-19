@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' http://127.0.0.1:5001 https://pawpal-300c5.web.app https://pawpal-300c5.firebaseapp.com;">
+  <title>PawPal - Join In</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./assets/images/Logo.png?v=2">
+  <link rel="apple-touch-icon" href="./assets/images/Logo.png?v=2">
+  <meta name="theme-color" content="#047857">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Lora (for Serif Logo) and Outfit + Inter for UI text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,600;1,600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandCream: '#FAFAF9',
+            brandCreamDark: '#F4F3EF',
+            brandCharcoal: '#1E1B4B',
+            brandTan: '#D97706',
+            brandOrange: '#C2410C',
+            brandGreen: '#15803D',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            serifLogo: ['Lora', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandCream text-gray-800 font-sans selection:bg-brandTan selection:text-white">
+
+  <!-- Top Global Navigation Header -->
+  <header class="sticky top-0 z-50 bg-brandCream/95 backdrop-blur-md border-b border-stone-200/80 px-6 py-4 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Logo Frame -->
+      <a href="index.html" class="flex items-center space-x-2.5 group">
+        <img src="./assets/images/Logo.png?v=2" alt="PawPal Logo" class="w-8 h-8 rounded-full object-contain">
+        <span class="text-2xl font-serifLogo font-bold text-brandCharcoal tracking-wider">PAWPAL</span>
+      </a>
+
+      <!-- Desktop Navbar links -->
+      <nav class="hidden md:flex space-x-8 text-[15px] font-medium text-brandCharcoal">
+        <a href="./index.html" class="hover:text-brandOrange transition-colors duration-200">Home</a>
+        <a href="./index.html#reporting-section" class="hover:text-brandOrange transition-colors duration-200">Report a Stray</a>
+        <a href="./about.html" class="hover:text-brandOrange transition-colors duration-200">About us</a>
+        <a href="./volunteer.html" class="text-brandOrange font-semibold transition-colors duration-200">Join In</a>
+        <a href="./dashboard.html" class="hover:text-brandOrange transition-colors duration-200">Impact</a>
+      </nav>
+
+      <!-- Action Trigger -->
+      <div class="flex items-center space-x-4">
+        <a href="./index.html#reporting-section" class="hidden sm:inline-flex items-center bg-brandOrange text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-brandOrange/90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-sm">
+          Report Distress
+        </a>
+        
+        <!-- Mobile Menu Hamburger Button -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="inline-flex md:hidden p-2 rounded-xl text-brandCharcoal hover:bg-brandCreamDark/80 focus:outline-none transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Responsive Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-stone-200/60 mt-4 pt-4 pb-2 flex flex-col space-y-3 px-2 font-medium text-[15px] text-brandCharcoal">
+      <a href="./index.html" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">Home</a>
+      <a href="./index.html#reporting-section" onclick="closeMobileMenu()" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">Report a Stray</a>
+      <a href="./about.html" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">About us</a>
+      <a href="./volunteer.html" class="text-brandOrange font-semibold py-1.5 border-b border-stone-100/50">Join In</a>
+      <a href="./dashboard.html" class="hover:text-brandOrange transition-colors py-1.5">Impact</a>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="max-w-7xl mx-auto py-12 md:py-20 px-6">
+    <div class="grid md:grid-cols-2 gap-12 xl:gap-16 items-start">
+      
+      <!-- Left Column: Information -->
+      <div class="space-y-8">
+        <div class="space-y-4">
+          <span class="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold tracking-wider text-brandOrange bg-brandTan/15 uppercase border border-brandTan/20">
+            Volunteer Ecosystem
+          </span>
+          <h1 class="text-4xl md:text-5.5xl font-display font-extrabold text-brandCharcoal leading-tight">
+            Be the voice for <span class="text-brandOrange">vulnerable strays</span> in your neighborhood
+          </h1>
+          <p class="text-stone-600 leading-relaxed text-[15px]">
+            Every single day, street animals face hunger, injuries, and road accidents. By volunteering your time, you join a rapid-response network that claims tickets, updates geolocation coordinates, and administers first-aid.
+          </p>
+        </div>
+
+        <!-- Alternating guides / steps block -->
+        <div class="bg-brandCreamDark/50 rounded-[24px] border border-stone-200/80 p-6 md:p-8 space-y-6">
+          <h2 class="text-xl font-display font-extrabold text-brandCharcoal">How Volunteers Coordinate</h2>
+          
+          <div class="space-y-4">
+            <!-- Step 1 -->
+            <div class="flex space-x-3.5">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brandTan/20 text-brandOrange flex items-center justify-center font-bold text-sm">1</div>
+              <div>
+                <h3 class="text-sm font-semibold text-brandCharcoal">Claim Alert Coordinates</h3>
+                <p class="text-xs text-stone-500 mt-0.5">When a citizen uploads a distress photo, our system alerts verified volunteers operating in that specific urban sector.</p>
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="flex space-x-3.5">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brandTan/20 text-brandOrange flex items-center justify-center font-bold text-sm">2</div>
+              <div>
+                <h3 class="text-sm font-semibold text-brandCharcoal">Coordinate Vet Care</h3>
+                <p class="text-xs text-stone-500 mt-0.5">Volunteers verify the animal's state on arrival and handle transport to the closest registered veterinary clinic.</p>
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="flex space-x-3.5">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brandTan/20 text-brandOrange flex items-center justify-center font-bold text-sm">3</div>
+              <div>
+                <h3 class="text-sm font-semibold text-brandCharcoal">Promote Adoption Transformations</h3>
+                <p class="text-xs text-stone-500 mt-0.5">Participate in post-care fostering or photograph healthy animals to list them for community adoptions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Frame -->
+        <div class="relative overflow-hidden rounded-[24px] border border-stone-200 shadow-md aspect-[16/10]">
+          <img src="assets/images/volunteer-community.jpg" alt="PawPal volunteers petting street animals" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- Right Column: Registration Form -->
+      <div class="bg-white rounded-[32px] border border-stone-200 shadow-xl p-8 md:p-10 space-y-6">
+        <div class="text-center max-w-sm mx-auto">
+          <h2 class="text-2.5xl font-display font-extrabold text-brandCharcoal">Become a Registered Volunteer</h2>
+          <p class="text-stone-500 text-xs mt-1.5 leading-relaxed">
+            Fill in your operational region details. Verified profiles gain access to the local alert dispatcher channel.
+          </p>
+        </div>
+
+        <form class="space-y-4" onsubmit="submitVolunteerApplication(event)">
+          <div>
+            <label class="block text-xs font-semibold text-brandCharcoal mb-1">Full Name <span class="text-brandOrange">*</span></label>
+            <input type="text" id="vol-name" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-brandCharcoal mb-1">Mobile Number <span class="text-brandOrange">*</span></label>
+              <input type="tel" id="vol-phone" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-brandCharcoal mb-1">Email Address <span class="text-brandOrange">*</span></label>
+              <input type="email" id="vol-email" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-brandCharcoal mb-1">Pincode / Sector <span class="text-brandOrange">*</span></label>
+              <input type="text" id="pincode" maxlength="6" placeholder="e.g. 560038" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-brandCharcoal mb-1">City <span class="text-brandOrange">*</span></label>
+              <input type="text" id="city" placeholder="City Name" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-brandCharcoal mb-1">Select Linked NGO/Shelter <span class="text-brandOrange">*</span></label>
+            <select id="linkedNgoSelect" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50 text-stone-600">
+              <option value="INDIRANAGAR ANIMAL PROTECTION WELFARE SHELTER">INDIRANAGAR ANIMAL PROTECTION WELFARE SHELTER</option>
+              <option value="ULSOOR LOCAL NGO RESCUE & VETERINARY UNIT">ULSOOR LOCAL NGO RESCUE & VETERINARY UNIT</option>
+              <option value="KORAMANGALA STRAY CARE SOCIETY">KORAMANGALA STRAY CARE SOCIETY</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-brandCharcoal mb-1">Specialized Skills / Availability</label>
+            <select class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50 text-stone-600">
+              <option>General Support / Transport</option>
+              <option>Veterinary background / First Aid</option>
+              <option>Temporary Animal Fostering</option>
+              <option>Social Media / Photography</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-brandCharcoal mb-1">Briefly outline your previous rescue experience</label>
+            <textarea rows="3" placeholder="I have fed stray dogs/cats or helped route cases..." class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50 resize-none"></textarea>
+          </div>
+
+          <!-- Verification Section -->
+          <div class="border-t border-stone-200/60 pt-4 space-y-4">
+            <h4 class="text-sm font-bold text-brandCharcoal">Anti-Bot Human Verification</h4>
+            
+            <div id="otp-trigger-container" class="space-y-3">
+              <p class="text-stone-500 text-xs leading-relaxed">
+                Click Verify below to complete a zero-cost client-side human validation challenge.
+              </p>
+              <button type="button" onclick="openCaptchaChallenge()" class="w-full bg-brandCharcoal text-white font-bold py-2.5 rounded-full hover:bg-brandCharcoal/95 transition-all text-xs">
+                Verify
+              </button>
+            </div>
+            
+            <div id="otp-input-container" class="hidden space-y-2">
+              <label class="block text-xs font-semibold text-brandCharcoal mb-1">Enter 6-Digit OTP <span class="text-brandOrange">*</span></label>
+              <input type="text" id="vol-otp-input" placeholder="e.g. 123456" class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+              <p class="text-[10px] text-stone-400">The 6-digit confirmation key is unlocked after clearing the verification matrix.</p>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-brandOrange text-white font-bold py-3.5 rounded-full hover:bg-brandOrange/95 transition-all text-sm shadow-md mt-2">
+            Submit Application
+          </button>
+        </form>
+
+        <!-- Dynamic Result Box -->
+        <div id="volunteer-success" class="hidden rounded-[16px] bg-brandGreen/10 border border-brandGreen/20 p-4">
+          <p class="text-xs text-brandGreen font-semibold flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            Application Submitted Successfully!
+          </p>
+          <p class="text-[10px] text-stone-500 mt-1">Our sector leads will contact you on WhatsApp/Signal to coordinate credentials verification.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="bg-brandCharcoal text-stone-300 py-16 px-6 border-t border-stone-900">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 items-start">
+      <!-- About Segment -->
+      <div class="space-y-4">
+        <div class="flex items-center space-x-2.5">
+          <div class="bg-white/10 p-2 rounded-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brandOrange" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 14c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-4.5-3c.83 0 1.5-.67 1.5-1.5S8.33 8 7.5 8 6 8.67 6 9.5 6.67 11 7.5 11zm9 0c.83 0 1.5-.67 1.5-1.5S17.33 8 16.5 8s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm-11-5C6.33 6 7 5.33 7 4.5S6.33 3 5.5 3 4 3.67 4 4.5 4.67 6 5.5 6zm13 0c.83 0 1.5-.67 1.5-1.5S17.33 3 16.5 3s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM12 16c-3.31 0-6 2.69-6 6h12c0-3.31-2.69-6-6-6z"/>
+            </svg>
+          </div>
+          <span class="text-xl font-serifLogo font-bold text-white tracking-wider">PAWPAL</span>
+        </div>
+        <p class="text-sm text-stone-400 leading-relaxed max-w-sm">
+          PawPal is a progressive platform built to eliminate rescue response delays for street animals in India, ensuring rapid dispatch, community action, and live transparency.
+        </p>
+      </div>
+
+      <!-- Quick Action segments -->
+      <div class="space-y-4">
+        <h4 class="text-base font-semibold text-white">Join the Cause</h4>
+        <ul class="space-y-2 text-sm text-stone-400">
+          <li><a href="index.html#reporting-section" class="hover:text-white transition-colors">Report Stray Distress</a></li>
+          <li><button onclick="toggleModal('ngo-modal')" class="hover:text-white transition-colors text-left focus:outline-none">Register NGO/Shelter</button></li>
+          <li><button onclick="toggleModal('volunteer-modal')" class="hover:text-white transition-colors text-left focus:outline-none">Become a Volunteer</button></li>
+        </ul>
+      </div>
+
+      <!-- Slogan segment -->
+      <div class="space-y-4 md:text-right">
+        <h4 class="text-xs uppercase tracking-widest text-brandTan font-bold">Indian Stray Animal Rescue</h4>
+        <p class="text-2xl font-display font-extrabold text-white leading-tight">
+          Together, we can make<br>a real difference!
+        </p>
+        <p class="text-xs text-stone-500 mt-2">© 2026 PawPal Rescue Network. Supporting UNSDG Life on Land.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- NGO Registration Modal -->
+  <div id="ngo-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brandCharcoal/55 backdrop-blur-sm hidden transition-all duration-300">
+    <div class="bg-white rounded-[24px] border border-stone-200 shadow-2xl p-8 max-w-md w-full relative">
+      <button onclick="toggleModal('ngo-modal')" class="absolute top-4 right-4 text-stone-400 hover:text-brandCharcoal">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h3 class="text-2xl font-display font-extrabold text-brandCharcoal mb-4">Register as Rescue NGO</h3>
+      <form class="space-y-4" onsubmit="handleRegistration('ngo-modal', event)">
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">NGO Name</label>
+          <input type="text" id="ngo-reg-name" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Operating Region</label>
+          <input type="text" placeholder="e.g. Indiranagar, Bangalore" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Contact Email</label>
+          <input type="email" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        
+        <!-- NGO Verification Method & Conditional Fields -->
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Verification Method</label>
+          <select id="verificationMethod" onchange="toggleNgoVerificationFields()" class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brandOrange bg-stone-50 text-stone-600">
+            <option value="Registration Number">Registration Number</option>
+            <option value="Proof of Rescue Work">Proof of Rescue Work</option>
+          </select>
+        </div>
+        <div id="ngo-reg-id-container">
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Official Registration ID <span class="text-brandOrange">*</span></label>
+          <input type="text" id="ngo-registration-id" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div id="ngo-proof-work-container" class="hidden space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-brandCharcoal mb-1">Verification Link (Portfolio/Socials/Drive) <span class="text-brandOrange">*</span></label>
+            <input type="url" id="ngo-portfolio-link" placeholder="https://..." class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-brandCharcoal mb-1">Summary of Recent Rescue Activities <span class="text-brandOrange">*</span></label>
+            <textarea id="ngo-activities-summary" rows="2" placeholder="Describe 2-3 recent street rescues..." class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50 resize-none"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-brandOrange text-white font-bold py-3 rounded-full hover:bg-brandOrange/95 transition-all text-sm mt-2">
+          Submit Verification Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Volunteer Registration Modal -->
+  <div id="volunteer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brandCharcoal/55 backdrop-blur-sm hidden transition-all duration-300">
+    <div class="bg-white rounded-[24px] border border-stone-200 shadow-2xl p-8 max-w-md w-full relative">
+      <button onclick="toggleModal('volunteer-modal')" class="absolute top-4 right-4 text-stone-400 hover:text-brandCharcoal">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h3 class="text-2xl font-display font-extrabold text-brandCharcoal mb-4">Join as Volunteer</h3>
+      <form class="space-y-4" onsubmit="handleRegistration('volunteer-modal', event)">
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Full Name</label>
+          <input type="text" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Area / Pincode</label>
+          <input type="text" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Phone Number</label>
+          <input type="tel" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <button type="submit" class="w-full bg-brandOrange text-white font-bold py-3 rounded-full hover:bg-brandOrange/95 transition-all text-sm mt-2">
+          Register with PawPal
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Captcha Challenge Modal -->
+  <div id="otp-verification-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brandCharcoal/55 backdrop-blur-sm hidden transition-all duration-300">
+    <div class="bg-white rounded-[24px] border border-stone-200 shadow-2xl p-8 max-w-sm w-full text-center space-y-4">
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brandOrange/10 text-brandOrange mb-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      </div>
+      <h3 class="text-xl font-display font-extrabold text-brandCharcoal">Human Verification Challenge</h3>
+      <p class="text-stone-500 text-xs leading-relaxed">
+        Please enter the characters displayed in the canvas matrix:
+      </p>
+      
+      <!-- Canvas Matrix -->
+      <div class="flex justify-center my-2">
+        <canvas id="captcha-canvas" width="200" height="60" class="border border-stone-200 rounded-[12px] bg-stone-50 shadow-inner"></canvas>
+      </div>
+      <div class="flex justify-center">
+        <button type="button" onclick="drawCaptcha()" class="text-xs text-brandOrange font-bold hover:underline focus:outline-none">Regenerate Captcha</button>
+      </div>
+      
+      <input type="text" id="captcha-answer" placeholder="Enter characters" class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm text-center uppercase focus:outline-none focus:border-brandOrange bg-stone-50 font-mono tracking-widest">
+      
+      <div class="border-t border-stone-100 pt-4">
+        <button type="button" onclick="verifyCaptcha()" class="w-full bg-brandCharcoal text-white font-bold py-2.5 rounded-full hover:bg-brandCharcoal/95 transition-all text-xs">Verify Captcha</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle helpers
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.add('hidden');
+    }
+
+    // Register Service Worker for offline capability with force update reload
+    if ('serviceWorker' in navigator) {
+      // Force reload on controllerchange (when new worker claims client control)
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('Service worker controller changed, reloading page...');
+        window.location.reload();
+      });
+
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => {
+            console.log('Service Worker registered successfully:', reg.scope);
+            reg.addEventListener('updatefound', () => {
+              const newWorker = reg.installing;
+              if (newWorker) {
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log('New service worker available, force reloading page...');
+                    window.location.reload();
+                  }
+                });
+              }
+            });
+          })
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+
+    let activeOtpToken = null;
+    let activeCaptchaText = "";
+
+    function generateRandomText(length) {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // Omitted ambiguous characters
+      let text = "";
+      for (let i = 0; i < length; i++) {
+        text += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return text;
+    }
+
+    function drawCaptcha() {
+      const canvas = document.getElementById('captcha-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Noise lines
+      ctx.strokeStyle = '#34D399';
+      ctx.lineWidth = 1.5;
+      for (let i = 0; i < 4; i++) {
+        ctx.beginPath();
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.stroke();
+      }
+      
+      activeCaptchaText = generateRandomText(6);
+      
+      // Draw characters
+      ctx.font = 'bold 24px monospace';
+      ctx.fillStyle = '#065F46';
+      ctx.textBaseline = 'middle';
+      
+      for (let i = 0; i < activeCaptchaText.length; i++) {
+        const char = activeCaptchaText[i];
+        const x = 20 + i * 28 + Math.random() * 5;
+        const y = canvas.height / 2 + (Math.random() * 10 - 5);
+        const angle = (Math.random() * 30 - 15) * Math.PI / 180;
+        
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.fillText(char, 0, 0);
+        ctx.restore();
+      }
+
+      // Noise dots
+      ctx.fillStyle = '#D97706';
+      for (let i = 0; i < 30; i++) {
+        ctx.beginPath();
+        ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 1, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+    }
+
+    function openCaptchaChallenge() {
+      activeOtpToken = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('otp-verification-modal').classList.remove('hidden');
+      setTimeout(drawCaptcha, 50);
+    }
+
+    function verifyCaptcha() {
+      const ansInput = document.getElementById('captcha-answer').value.trim().toUpperCase();
+      
+      if (ansInput === activeCaptchaText) {
+        document.getElementById('otp-verification-modal').classList.add('hidden');
+        document.getElementById('otp-input-container').classList.remove('hidden');
+        document.getElementById('otp-trigger-container').innerHTML = `
+          <div class="flex items-center text-brandGreen text-xs font-bold bg-brandGreen/5 border border-brandGreen/25 rounded-full px-4 py-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+            Human verification challenge cleared. OTP code sent.
+          </div>
+        `;
+        alert(`[PawPal Security Verification]\nCaptcha Solved! Your 6-Digit Verification Code is: ${activeOtpToken}`);
+      } else {
+        alert("Verification Failed: Captcha answer is incorrect. Please try again.");
+        drawCaptcha();
+        document.getElementById('captcha-answer').value = "";
+      }
+    }
+
+    function toggleNgoVerificationFields() {
+      const method = document.getElementById('verificationMethod').value;
+      const regContainer = document.getElementById('ngo-reg-id-container');
+      const regInput = document.getElementById('ngo-registration-id');
+      const proofContainer = document.getElementById('ngo-proof-work-container');
+      const portfolioInput = document.getElementById('ngo-portfolio-link');
+      const activitiesInput = document.getElementById('ngo-activities-summary');
+
+      if (method === 'Registration Number') {
+        regContainer.classList.remove('hidden');
+        regInput.setAttribute('required', 'true');
+        proofContainer.classList.add('hidden');
+        portfolioInput.removeAttribute('required');
+        activitiesInput.removeAttribute('required');
+      } else {
+        regContainer.classList.add('hidden');
+        regInput.removeAttribute('required');
+        proofContainer.classList.remove('hidden');
+        portfolioInput.setAttribute('required', 'true');
+        activitiesInput.setAttribute('required', 'true');
+      }
+    }
+
+    function submitVolunteerApplication(event) {
+      event.preventDefault();
+      
+      // Check OTP compliance
+      const otpInput = document.getElementById('vol-otp-input').value;
+      if (!activeOtpToken || otpInput !== activeOtpToken.toString()) {
+        alert("Verification Error: Invalid OTP code. Please solve the human captcha verification.");
+        return;
+      }
+
+      const nameVal = document.getElementById('vol-name').value;
+      const phoneVal = document.getElementById('vol-phone').value;
+      const emailVal = document.getElementById('vol-email').value;
+      const linkedNgoVal = document.getElementById('linkedNgoSelect').value;
+      
+      // Store user profile to authenticate client session
+      const profile = {
+        name: nameVal,
+        email: emailVal,
+        phone: phoneVal,
+        role: "volunteer",
+        linked_ngo: linkedNgoVal,
+        verification_status: "pending_approval",
+        approved_by: "",
+        registeredAt: new Date().toISOString()
+      };
+
+      localStorage.setItem('pawpal_user_profile', JSON.stringify(profile));
+
+      // Save to global user registry
+      let users = [];
+      try {
+        users = JSON.parse(localStorage.getItem('pawpal_users')) || [];
+      } catch (e) {
+        users = [];
+      }
+
+      // Check if user already exists
+      const existingIdx = users.findIndex(u => u.phone === profile.phone);
+      if (existingIdx !== -1) {
+        users[existingIdx] = profile;
+      } else {
+        users.push(profile);
+      }
+      localStorage.setItem('pawpal_users', JSON.stringify(users));
+
+      const form = event.target;
+      const successBox = document.getElementById('volunteer-success');
+      
+      successBox.innerHTML = `
+        <div class="flex items-start text-brandGreen text-xs font-semibold bg-brandGreen/5 border border-brandGreen/25 rounded-2xl p-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2.5 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div>
+            Account Created! Awaiting approval from ${linkedNgoVal} before field rescue access is granted. Redirecting to your dashboard...
+          </div>
+        </div>
+      `;
+      successBox.classList.remove('hidden');
+      form.reset();
+      
+      // Auto-dismiss or focus success box
+      successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Automatically redirect to dashboard.html after 3 seconds
+      setTimeout(() => {
+        window.location.href = './dashboard.html';
+      }, 3000);
+    }
+
+    // Open/Close Modals
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.toggle('hidden');
+    }
+
+    function handleRegistration(modalId, event) {
+      event.preventDefault();
+      
+      let ngoName = "INDIRANAGAR ANIMAL PROTECTION WELFARE SHELTER"; // default fallback
+      if (modalId === 'ngo-modal') {
+        const inputName = document.getElementById('ngo-reg-name');
+        if (inputName && inputName.value) {
+          ngoName = inputName.value;
+        }
+      }
+
+      // Store user profile to authenticate client session
+      const profile = {
+        name: ngoName,
+        email: "partner@pawpal.org",
+        role: "partner",
+        registeredAt: new Date().toISOString()
+      };
+      localStorage.setItem('pawpal_user_profile', JSON.stringify(profile));
+
+      alert(`Registration submitted! PawPal administrators have verified "${ngoName}". You are now authorized to vet volunteers and claim dispatches.`);
+      toggleModal(modalId);
+      
+      setTimeout(() => {
+        window.location.href = './dashboard.html';
+      }, 1000);
+    }
+
+    // Automatic Pincode Lookup & City Auto-Fill
+    document.getElementById('pincode').addEventListener('input', async function(e) {
+        const pincode = e.target.value.trim();
+        const cityInput = document.getElementById('city');
+        
+        // Only trigger when exactly 6 digits are typed
+        if (pincode.length === 6 && /^\d+$/.test(pincode)) {
+            cityInput.placeholder = "Detecting city...";
+            
+            // 1. FAST LOCAL MATRIX LOOKUP (Immediate response for primary test regions)
+            const localPincodes = {
+                '400': 'Mumbai', '110': 'Delhi', '700': 'Kolkata', '600': 'Chennai',
+                '560': 'Bengaluru', '500': 'Hyderabad', '380': 'Ahmedabad', '411': 'Pune'
+            };
+            const prefix = pincode.substring(0, 3);
+            if (localPincodes[prefix]) {
+                cityInput.value = localPincodes[prefix];
+                cityInput.placeholder = "City";
+                return; // Exit early if local match hits
+            }
+
+            // 2. NETWORK FETCH FALLBACK WITH CLEAN CORS HANDLING
+            try {
+                const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+                if (!response.ok) throw new Error('Network error');
+                
+                const data = await response.json();
+                if (data && data[0] && data[0].Status === "Success" && data[0].PostOffice) {
+                    // Safely grab the District from the first post office object
+                    const detectedCity = data[0].PostOffice[0].District;
+                    if (detectedCity) {
+                        cityInput.value = detectedCity;
+                    }
+                }
+            } catch (error) {
+                console.error("Pincode API lookup failed, falling back to manual entry:", error);
+            } finally {
+                cityInput.placeholder = "City";
+            }
+        }
+    });
+  </script>
+</body>
+</html>

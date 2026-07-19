@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' http://127.0.0.1:5001 https://pawpal-300c5.web.app https://pawpal-300c5.firebaseapp.com;">
+  <title>About Us - PawPal Indian Stray Animal Rescue</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./assets/images/Logo.png?v=2">
+  <link rel="apple-touch-icon" href="./assets/images/Logo.png?v=2">
+  <meta name="theme-color" content="#047857">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Lora (for Serif Logo) and Outfit + Inter for UI text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,600;1,600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandCream: '#FAFAF9',
+            brandCreamDark: '#F4F3EF',
+            brandCharcoal: '#1E1B4B',
+            brandTan: '#D97706',
+            brandOrange: '#C2410C',
+            brandGreen: '#15803D',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            serifLogo: ['Lora', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandCream text-gray-800 font-sans selection:bg-brandTan selection:text-white">
+
+  <!-- Top Global Navigation Header -->
+  <header class="sticky top-0 z-50 bg-brandCream/95 backdrop-blur-md border-b border-stone-200/80 px-6 py-4 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Logo Frame -->
+      <a href="index.html" class="flex items-center space-x-2.5 group">
+        <img src="./assets/images/Logo.png?v=2" alt="PawPal Logo" class="w-8 h-8 rounded-full object-contain">
+        <span class="text-2xl font-serifLogo font-bold text-brandCharcoal tracking-wider">PAWPAL</span>
+      </a>
+
+      <!-- Desktop Navbar links -->
+      <nav class="hidden md:flex space-x-8 text-[15px] font-medium text-brandCharcoal">
+        <a href="./index.html" class="hover:text-brandOrange transition-colors duration-200">Home</a>
+        <a href="./index.html#reporting-section" class="hover:text-brandOrange transition-colors duration-200">Report a Stray</a>
+        <a href="./about.html" class="text-brandOrange font-semibold transition-colors duration-200">About us</a>
+        <a href="./volunteer.html" class="hover:text-brandOrange transition-colors duration-200">Join In</a>
+        <a href="./dashboard.html" class="hover:text-brandOrange transition-colors duration-200">Impact</a>
+      </nav>
+
+      <!-- Action Trigger -->
+      <div class="flex items-center space-x-4">
+        <a href="./index.html#reporting-section" class="hidden sm:inline-flex items-center bg-brandOrange text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-brandOrange/90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-sm">
+          Report Distress
+        </a>
+        
+        <!-- Mobile Menu Hamburger Button -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="inline-flex md:hidden p-2 rounded-xl text-brandCharcoal hover:bg-brandCreamDark/80 focus:outline-none transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Responsive Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-stone-200/60 mt-4 pt-4 pb-2 flex flex-col space-y-3 px-2 font-medium text-[15px] text-brandCharcoal">
+      <a href="./index.html" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">Home</a>
+      <a href="./index.html#reporting-section" onclick="closeMobileMenu()" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">Report a Stray</a>
+      <a href="./about.html" class="text-brandOrange font-semibold py-1.5 border-b border-stone-100/50">About us</a>
+      <a href="./volunteer.html" class="hover:text-brandOrange transition-colors py-1.5 border-b border-stone-100/50">Join In</a>
+      <a href="./dashboard.html" class="hover:text-brandOrange transition-colors py-1.5">Impact</a>
+    </div>
+  </header>
+
+  <!-- Section 1: Compassion in Action (Alternating Grid based on 2.jpg) -->
+  <section class="py-16 md:py-24 px-6 max-w-7xl mx-auto space-y-16">
+    <div class="text-center max-w-xl mx-auto space-y-3">
+      <span class="text-xs font-semibold tracking-widest text-brandOrange uppercase bg-brandTan/15 px-3 py-1 rounded-full">
+        Our Rescue Operations Journey
+      </span>
+      <h1 class="text-4xl md:text-5xl font-display font-extrabold text-brandCharcoal">
+        Compassion in Action
+      </h1>
+      <p class="text-stone-500 text-sm leading-relaxed">
+        PawPal serves as a trusted ecosystem connecting street reports directly to responsive shelter units.
+      </p>
+    </div>
+
+    <!-- Alternating 2-Column Grid Layout matching 2.jpg side-by-side structure -->
+    <div class="space-y-16 max-w-5xl mx-auto">
+      
+      <!-- Row 1: Image Left, Text Right -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div class="overflow-hidden rounded-[24px] border border-stone-200 shadow-md aspect-[4/3] max-h-72">
+          <img src="assets/images/about-rescue-impact.jpg" alt="Indian volunteer feeding stray dogs and cats" class="w-full h-full object-cover">
+        </div>
+        <div class="space-y-4 bg-brandCreamDark/30 border border-stone-200/50 p-6 md:p-8 rounded-[24px]">
+          <h2 class="text-2xl font-display font-extrabold text-brandCharcoal">Our commitment to stray animal welfare</h2>
+          <p class="text-xs uppercase tracking-widest text-brandTan font-bold">Project Overview & Mission</p>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            We work directly with hyper-local shelters, veterinary clinics, and compassionate citizens. Our platform is built on modern routing triggers to ensure that critical alerts reach the closest verified responders instantly. Join our mission to create a safe, compassionate ecosystem for stray animals.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 2: Text Left, Image Right -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div class="space-y-4 bg-brandCreamDark/30 border border-stone-200/50 p-6 md:p-8 rounded-[24px] md:order-1">
+          <h2 class="text-2xl font-display font-extrabold text-brandCharcoal">Reporting a Stray Animal</h2>
+          <p class="text-xs uppercase tracking-widest text-brandTan font-bold">A Step-by-Step Process</p>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            Found an animal that is sick, injured, or in danger? Take a clear photo using your phone camera, describe the situation in your regional language via our Gnani.ai voice assistant, and let our GPS automated tracker locate the animal instantly. Our system routes the ticket immediately.
+          </p>
+        </div>
+        <div class="overflow-hidden rounded-[24px] border border-stone-200 shadow-md aspect-[4/3] max-h-72 md:order-2">
+          <img src="assets/images/volunteer-community.jpg" alt="PawPal volunteers petting street cat and dog in park" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- Row 3: Image Left, Text Right -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div class="overflow-hidden rounded-[24px] border border-stone-200 shadow-md aspect-[4/3] max-h-72">
+          <img src="./assets/images/A%20simple%20guide%20to%20report%20strays%20effectively.png" alt="A simple guide to report strays effectively" class="w-full h-full object-cover">
+        </div>
+        <div class="space-y-4 bg-brandCreamDark/30 border border-stone-200/50 p-6 md:p-8 rounded-[24px]">
+          <h2 class="text-2xl font-display font-extrabold text-brandCharcoal">A simple guide to report strays effectively</h2>
+          <p class="text-xs uppercase tracking-widest text-brandTan font-bold">Tips on how to approach strays</p>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            Always maintain a safe distance when approaching an injured stray. Offer clean water or food if the animal is calm, and speak in a soft, soothing voice. Avoid making sudden movements, and wait for local NGO volunteers to arrive with professional medical rescue gear.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 4: Text Left, Image Right -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div class="space-y-4 bg-brandCreamDark/30 border border-stone-200/50 p-6 md:p-8 rounded-[24px] md:order-1">
+          <h2 class="text-2xl font-display font-extrabold text-brandCharcoal">Join us in making a difference for strays</h2>
+          <p class="text-xs uppercase tracking-widest text-brandTan font-bold">Together we can help strays</p>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            Becoming a PawPal volunteer means you can directly coordinate rescues, claim emergency distress tickets in your local neighborhood, and update status tracking data. Your effort ensures no street animal goes untreated in urban environments.
+          </p>
+        </div>
+        <div class="overflow-hidden rounded-[24px] border border-stone-200 shadow-md aspect-[4/3] max-h-72 md:order-2">
+          <img src="./assets/images/Join%20us%20in%20making%20a%20difference%20for%20strays.png" alt="Join us in making a difference for strays" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- Row 5: Image Left, Text Right -->
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div class="overflow-hidden rounded-[24px] border border-stone-200 shadow-md aspect-[4/3] max-h-72">
+          <img src="./assets/images/Every%20action%20you%20take%20counts%20toward%20change.png" alt="Every action you take counts toward change" class="w-full h-full object-cover">
+        </div>
+        <div class="space-y-4 bg-brandCreamDark/30 border border-stone-200/50 p-6 md:p-8 rounded-[24px]">
+          <h2 class="text-2xl font-display font-extrabold text-brandCharcoal">Every action you take counts toward change</h2>
+          <p class="text-xs uppercase tracking-widest text-brandTan font-bold">Your Actions Count</p>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            Every distress report submitted on PawPal triggers automated rescue pathways. Local citizens receive instant updates on when an NGO has claimed the ticket, bringing transparency, accountability, and reassurance to the community.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 2: Why Rescuing Strays Matters (Grid Card Structure based on 2.jpg) -->
+  <section class="py-16 md:py-24 bg-brandCreamDark border-t border-stone-200 px-6">
+    <div class="max-w-7xl mx-auto space-y-16">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-xl mx-auto space-y-3">
+        <h2 class="text-3.5xl font-display font-extrabold text-brandCharcoal">
+          Why Rescuing Strays Matters
+        </h2>
+        <p class="text-stone-500 text-sm leading-relaxed">
+          Stray rescue projects directly influence local cities, environment health, and community harmony.
+        </p>
+      </div>
+
+      <!-- 3-Column Card Layout matching 2.jpg exactly -->
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Card 1 -->
+        <div class="bg-brandCream rounded-[24px] border border-stone-300 shadow-sm p-8 flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div>
+            <h3 class="text-lg font-display font-extrabold text-brandCharcoal mb-3">Health Benefits of Stray Rescues</h3>
+            <p class="text-stone-500 text-sm leading-relaxed font-normal">
+              Promotes public health by implementing community vaccination programs (rabies control) and local sterilization drives, making streets safer for humans and strays alike.
+            </p>
+          </div>
+          <div class="pt-6 text-right">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-stone-200 text-brandCharcoal hover:bg-brandOrange hover:text-white transition-all text-xs font-semibold cursor-pointer">➔</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-brandCream rounded-[24px] border border-stone-300 shadow-sm p-8 flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div>
+            <h3 class="text-lg font-display font-extrabold text-brandCharcoal mb-3">Community Impact of Animal Rescues</h3>
+            <p class="text-stone-500 text-sm leading-relaxed font-normal">
+              Reduces stray population density humanely, prevents territorial pack conflicts, and fosters a collaborative neighborhood culture of compassion and empathy.
+            </p>
+          </div>
+          <div class="pt-6 text-right">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-stone-200 text-brandCharcoal hover:bg-brandOrange hover:text-white transition-all text-xs font-semibold cursor-pointer">➔</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-brandCream rounded-[24px] border border-stone-300 shadow-sm p-8 flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div>
+            <h3 class="text-lg font-display font-extrabold text-brandCharcoal mb-3">Emotional Connection of Helping</h3>
+            <p class="text-stone-500 text-sm leading-relaxed font-normal">
+              Rescuing an animal in pain creates a profound emotional bond. Feeding or treating street animals instills deep peace and grounds our urban community.
+            </p>
+          </div>
+          <div class="pt-6 text-right">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-stone-200 text-brandCharcoal hover:bg-brandOrange hover:text-white transition-all text-xs font-semibold cursor-pointer">➔</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="bg-brandCharcoal text-stone-300 py-16 px-6 border-t border-stone-900">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 items-start">
+      <!-- About Segment -->
+      <div class="space-y-4">
+        <div class="flex items-center space-x-2.5">
+          <div class="bg-white/10 p-2 rounded-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brandOrange" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 14c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-4.5-3c.83 0 1.5-.67 1.5-1.5S8.33 8 7.5 8 6 8.67 6 9.5 6.67 11 7.5 11zm9 0c.83 0 1.5-.67 1.5-1.5S17.33 8 16.5 8s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm-11-5C6.33 6 7 5.33 7 4.5S6.33 3 5.5 3 4 3.67 4 4.5 4.67 6 5.5 6zm13 0c.83 0 1.5-.67 1.5-1.5S17.33 3 16.5 3s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM12 16c-3.31 0-6 2.69-6 6h12c0-3.31-2.69-6-6-6z"/>
+            </svg>
+          </div>
+          <span class="text-xl font-serifLogo font-bold text-white tracking-wider">PAWPAL</span>
+        </div>
+        <p class="text-sm text-stone-400 leading-relaxed max-w-sm">
+          PawPal is a progressive platform built to eliminate rescue response delays for street animals in India, ensuring rapid dispatch, community action, and live transparency.
+        </p>
+      </div>
+
+      <!-- Quick Action segments -->
+      <div class="space-y-4">
+        <h4 class="text-base font-semibold text-white">Join the Cause</h4>
+        <ul class="space-y-2 text-sm text-stone-400">
+          <li><a href="index.html#reporting-section" class="hover:text-white transition-colors">Report Stray Distress</a></li>
+          <li><button onclick="toggleModal('ngo-modal')" class="hover:text-white transition-colors text-left focus:outline-none">Register NGO/Shelter</button></li>
+          <li><button onclick="toggleModal('volunteer-modal')" class="hover:text-white transition-colors text-left focus:outline-none">Become a Volunteer</button></li>
+        </ul>
+      </div>
+
+      <!-- Slogan segment -->
+      <div class="space-y-4 md:text-right">
+        <h4 class="text-xs uppercase tracking-widest text-brandTan font-bold">Indian Stray Animal Rescue</h4>
+        <p class="text-2xl font-display font-extrabold text-white leading-tight">
+          Together, we can make<br>a real difference!
+        </p>
+        <p class="text-xs text-stone-500 mt-2">© 2026 PawPal Rescue Network. Supporting UNSDG Life on Land.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- NGO Registration Modal -->
+  <div id="ngo-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brandCharcoal/55 backdrop-blur-sm hidden transition-all duration-300">
+    <div class="bg-white rounded-[24px] border border-stone-200 shadow-2xl p-8 max-w-md w-full relative">
+      <button onclick="toggleModal('ngo-modal')" class="absolute top-4 right-4 text-stone-400 hover:text-brandCharcoal">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h3 class="text-2xl font-display font-extrabold text-brandCharcoal mb-4">Register as Rescue NGO</h3>
+      <form class="space-y-4" onsubmit="handleRegistration('ngo-modal', event)">
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">NGO Name</label>
+          <input type="text" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Operating Region</label>
+          <input type="text" placeholder="e.g. Indiranagar, Bangalore" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Contact Email</label>
+          <input type="email" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <button type="submit" class="w-full bg-brandOrange text-white font-bold py-3 rounded-full hover:bg-brandOrange/95 transition-all text-sm mt-2">
+          Submit Verification Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Volunteer Registration Modal -->
+  <div id="volunteer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brandCharcoal/55 backdrop-blur-sm hidden transition-all duration-300">
+    <div class="bg-white rounded-[24px] border border-stone-200 shadow-2xl p-8 max-w-md w-full relative">
+      <button onclick="toggleModal('volunteer-modal')" class="absolute top-4 right-4 text-stone-400 hover:text-brandCharcoal">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h3 class="text-2xl font-display font-extrabold text-brandCharcoal mb-4">Join as Volunteer</h3>
+      <form class="space-y-4" onsubmit="handleRegistration('volunteer-modal', event)">
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Full Name</label>
+          <input type="text" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Area / Pincode</label>
+          <input type="text" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-brandCharcoal mb-1">Phone Number</label>
+          <input type="tel" required class="w-full border border-stone-300 rounded-[12px] px-3.5 py-2 text-sm focus:outline-none focus:border-brandOrange bg-stone-50">
+        </div>
+        <button type="submit" class="w-full bg-brandOrange text-white font-bold py-3 rounded-full hover:bg-brandOrange/95 transition-all text-sm mt-2">
+          Register with PawPal
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle helpers
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.add('hidden');
+    }
+
+    // Register Service Worker for offline capability with force update reload
+    if ('serviceWorker' in navigator) {
+      // Force reload on controllerchange (when new worker claims client control)
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('Service worker controller changed, reloading page...');
+        window.location.reload();
+      });
+
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => {
+            console.log('Service Worker registered successfully:', reg.scope);
+            reg.addEventListener('updatefound', () => {
+              const newWorker = reg.installing;
+              if (newWorker) {
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log('New service worker available, force reloading page...');
+                    window.location.reload();
+                  }
+                });
+              }
+            });
+          })
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+
+    // Open/Close Modals
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.toggle('hidden');
+    }
+
+    function handleRegistration(modalId, event) {
+      event.preventDefault();
+      alert("Registration submitted! PawPal administrators will review certificates and verify credentials within 24 hours.");
+      toggleModal(modalId);
+    }
+  </script>
+</body>
+</html>
